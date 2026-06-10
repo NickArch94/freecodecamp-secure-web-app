@@ -70,13 +70,13 @@ public function findTransactionsByAccountNumber(string $accountNumber): array
         ->findBy(['accountNumber' => $accountNumber]);
 }
 
- public function findTransactionsByAmountRange(float $minAmount, float $maxAmount): array
- {
-    $qb = $this->documentManager->createQueryBuilder(Transaction::class);
-    $qb->field('amount')->gte($minAmount)->lte($maxAmount);
+    public function findTransactionsByAmountRange(float $minAmount, float $maxAmount): array
+    {
+        $qb = $this->documentManager->createQueryBuilder(Transaction::class);
+        $qb->field('amount')->gte($minAmount)->lte($maxAmount);
 
-    return $qb->getQuery()->execute()->toArray();
-}
+        return $qb->getQuery()->execute()->toArray();
+    }
 
     public function findAccountBySsn(string $ssn): ?Account
     {
