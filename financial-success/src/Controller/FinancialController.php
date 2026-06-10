@@ -86,7 +86,31 @@ class FinancialController extends AbstractController
         } catch (\Exception $e) {
             return $this->errorResonse(message: 'Error creating new transaction: ' . $e->getMessage());
         }
-        // 25:26 in my tutorial video
+        
+    }
+
+    #[Route(path: '/api/harmony/accounts/balance-range', methods: ['GET'])]
+
+    public function getAccountsByBalanceRange(Request $request): JsonResponse
+    {
+        $minBalance = (float) $request->query->get(key: 'min', default: 0);
+        $maxBalance = (float) $request->query->get(key: 'max', default: 10000000);
+
+        $accounts = $this->financialService->findAccountsByBalanceRange(minBalance: $minBalance, maxBalance: $maxBalance);
+
+        $accountData = array_map(callback: fn($account): array => [
+            'id' => $account->getId(),
+            'customerName' => $account->getCustomerName(),
+            'accountNumber' => $account->getAccountNumber(),
+            'balance' => $account->getBalance(),
+            'email' => $account->getEmail(),
+            'createdAt' => $account->getCreatedAt()->format('Y-m-d H:i:s')
+        ], array: $accounts);
+
+        return $this->successResponse(data: [
+            'accounts' => $accountData,
+            'count' => count(value: $accountData)
+        ]);
     }
 }
 
