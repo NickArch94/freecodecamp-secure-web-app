@@ -301,7 +301,7 @@ class FinancialController extends AbstractController
         ]);
     }
 
-    #[Route('api/jharmony/debug/encryption-status', methods: ['GET'])]
+    #[Route('api/harmony/debug/encryption-status', methods: ['GET'])]
     public function getEncryptionStatus(): JsonResponse
     {
         return $this->successResponse([

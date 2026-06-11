@@ -43,10 +43,10 @@ class transaction
 
 
 
-    #[ODM\Field(Type: 'date')]
+    #[ODM\Field(type: 'date')]
     private \DateTime $transactionDate;
 
-    #[ODM\Field(Type: 'string')]
+    #[ODM\Field(type: 'string')]
     private string $status;
 
     public function _construct()
