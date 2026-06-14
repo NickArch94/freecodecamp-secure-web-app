@@ -7,7 +7,7 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations\Encrypt;
 use Doctrine\ODM\MongoDB\Mapping\Annotations\EncryptQuery;
 
 #[ODM\Document(collection: 'transactions')]
-class transaction
+class Transaction
 {
     #[ODM\Id]
     private ?string $id = null;
